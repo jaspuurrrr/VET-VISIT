@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>VetVisit Web App</title>
+    <link rel="icon" href="../../assets/img/VetVisitIcon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <link rel="stylesheet" href="../../styles/clientstyles.css">
+
+    <link rel="stylesheet" href="../../styles/client-calstyles.css">
+
+    <!--<link rel="stylesheet" href="../../styles/dropdown.css">-->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+
+</head>
+
+<body>
+    <!--HamMenu-->
+    <div class="bx bx-menu" id="dash-icon"></div>
+    <!--SIDEBAR-->
+    <div class="sidebar">
+        <div class="lbl"><i class='bx bxs-clinic'></i> VetVisit</a></div>
+        <ul>
+            <li><a href="client-cal.html">Book Appointment</a></li>
+            <li><a href="client-history.html">History</a></li>
+            <li><a href="client-pets.html">My Pets</a></li>
+            <li><a href="client-account.html">Account</a></li>
+        </ul>
+        <button id="logout">Log Out</button>
+    </div>
+
+    <div class="calcontainer">
+      <!--LEFT SIDE-->
+      <div class="left">
+        <div class="calendar">
+          <div class="month">
+            <i class='bx bx-chevron-left prev' ></i>
+            <div class="date">december 2015</div>
+            <i class='bx bx-chevron-right next' ></i>
+          </div>
+          <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+          </div>
+          <div class="days"></div>
+          <div class="goto-today">
+            <div class="goto">
+              <input type="text" placeholder="mm/yyyy" class="date-input" />
+              <button class="goto-btn">Go</button>
+            </div>
+            <button class="today-btn">Today</button>
+          </div>
+        </div>
+      </div>
+      <!--RIGHT SIDE-->
+      <div class="right">
+        <div class="today-date">
+          <div class="event-day">wed</div>
+          <div class="event-date">12th december 2022</div>
+        </div>
+        <div class="time-cont">
+          <div class="avail">Time Slots:</div>
+          <div class="events"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <!--SET APPOINTMENT MODAL-->
+    <div class="modal" id="myModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+          <h1>Set Appointment Details</h1>
+          <div class="appt-con">
+            <div class="appt-date">
+              <span id="modal-date"></span>
+              <p>|</p>
+              <span id="modal-day"></span>
+            </div>
+            <div class="appt-ts">
+              <p>Time Slot: </p>
+              <span id="modal-time"></span>
+            </div>
+          </div>
+          <form class="appt-con">
+            <label>Purpose:</label>
+            <input class="appt-inputs" id="appt-descrip"> 
+          </form>
+          <form class="appt-con">
+            <label>Veterinarian:</label>
+            <div class="choosevetbox">
+              <input class="appt-inputs" id="appt-vetchoice" disabled> 
+              <div class="dropdown">
+                <button class="dropbtn" id="appt-choosevet" onclick="DropItVet()">Choose Vet</button>
+                <div class="dp3" id="vetDropdown">
+                  <div class="vdropdown-content" >
+                    <a href="#">Vet 1</a>
+                    <a href="#">Vet 2</a>
+                    <a href="#">Vet 3</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="appt-con">
+            <div class="appt-pet-con">
+              <label>Pet Details:</label>
+              <div class="dropdown">
+                <button class="dropbtn" id="appt-choosepet" onclick="DropItPet()">Choose Pet</button>
+                <div class="dp3"  id="myDropdown">
+                  <div class="dropdown-content">
+                    <a href="#">--deselect--</a>
+                    <a href="#">Pet 1</a>
+                    <a href="#">Pet 2</a>
+                    <a href="#">Pet 3</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form class="appt-conpet">
+              <div class="appt-conpet2">
+                <label>Name:</label>
+                <input class="appt-inputs" id="appt-petname"> 
+                <label>Pet Type:</label>
+                <input class="appt-inputs" id="appt-pettype">
+              </div>
+              <div class="appt-conpet2">
+                <label>Age:</label>
+                <input class="appt-inputs" id="appt-petage"> 
+              </div> 
+            </form>
+          </div>
+          <button id="set-appt">Proceed</button>
+      </div>
+    </div>
+    
+
+    <script src="../../scripts/client-calscript.js"></script>
+
+  <script>
+    function DropItPet() {
+      var dropdownContent = document.getElementById("myDropdown");
+      dropdownContent.classList.toggle("show");
+    }
+    
+    function DropItVet() {
+      var VdropdownContent = document.getElementById("vetDropdown");
+      VdropdownContent.classList.toggle("show");
+    }
+
+  </script>
+  <script src="../../scripts/logout.js"></script>
+</body>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>VetVisit Web App</title>
+    <link rel="icon" href="../../assets/img/VetVisitIcon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <link rel="stylesheet" href="../../styles/clientstyles.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <!--HamMenu-->
+    <div class="bx bx-menu" id="dash-icon"></div>
+    <!--SIDEBAR-->
+    <div class="sidebar">
+        <div class="lbl"><i class='bx bxs-clinic'></i> VetVisit</a></div>
+        <ul>
+            <li><a href="client-cal.html">Book Appointment</a></li>
+            <li><a href="client-history.html">History</a></li>
+            <li><a href="client-pets.html">My Pets</a></li>
+            <li><a href="client-account.html">Account</a></li>
+        </ul>
+        <button id="logout">Log Out</button>
+    </div>
+    
+    <script src="../../scripts/logout.js"></script>
+
+    <div class="container">
+        <div class="pet-header">
+            <h1>My Pets</h1>
+            <div class="pet-header-buttons">
+                <button class="profbtn" id="add-pet">Add Pet</button>
+            </div>
+        </div>
+        <div class="pet-cont-grp">
+            <div class="pet-cont-indv" onclick="viewpetModal(1)" id = "pet1" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic1">
+                <h2 id="petid1" style="display: none;">PetId:35</h2>
+                <h5 id="petid1-display" >Pet ID: 35</h2>
+                <h2 id="petage1" style="display: none;">Pet Age</h2>
+                <h2 id="petname1">Pet Name</h2>
+                <span id="pettype1">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(2)" id = "pet2" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic2">
+                <h2 id="petid2" style="display: none;">Pet Id</h2>
+                <h5 id="petid2-display" >Pet ID: 35</h2>
+                <h2 id="petage2" style="display: none;">Pet Age</h2>
+                <h2 id="petname2">Pet Name</h2>
+                <span id="pettype2">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(3)" id = "pet3" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic3">
+                <h2 id="petid3" style="display: none;">Pet Id</h2>
+                <h5 id="petid3-display" >Pet ID: 35</h2>
+                <h2 id="petage3" style="display: none;">Pet Age</h2>
+                <h2 id="petname3">Pet Name</h2>
+                <span id="pettype3">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(4)" id = "pet4" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic4">
+                <h2 id="petid4" style="display: none;">Pet Id</h2>
+                <h5 id="petid4-display" >Pet ID: 35</h2>
+                <h2 id="petage4" style="display: none;">Pet Age</h2>
+                <h2 id="petname4">Pet Name</h2>
+                <span id="pettype4">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(5)" id = "pet5" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic5">
+                <h2 id="petid5" style="display: none;">Pet Id</h2>
+                <h5 id="petid5-display" >Pet ID: 35</h2>
+                <h2 id="petage5" style="display: none;">Pet Age</h2>
+                <h2 id="petname5">Pet Name</h2>
+                <span id="pettype5">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(6)" id = "pet6" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic6">
+                <h2 id="petid6" style="display: none;">Pet Id</h2>
+                <h5 id="petid6-display" >Pet ID: 35</h2>
+                <h2 id="petage6" style="display: none;">Pet Age</h2>
+                <h2 id="petname6">Pet Name</h2>
+                <span id="pettype6">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(7)" id = "pet7" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic7">
+                <h2 id="petid7" style="display: none;">Pet Id</h2>
+                <h5 id="petid7-display" >Pet ID: 35</h2>
+                <h2 id="petage7" style="display: none;">Pet Age</h2>
+                <h2 id="petname7">Pet Name</h2>
+                <span id="pettype7">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(8)" id = "pet8" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic8">
+                <h2 id="petid8" style="display: none;">Pet Id</h2>
+                <h5 id="petid8-display" >Pet ID: 35</h2>
+                <h2 id="petage8" style="display: none;">Pet Age</h2>
+                <h2 id="petname8">Pet Name</h2>
+                <span id="pettype8">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(9)" id = "pet9" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic9">
+                <h2 id="petid9" style="display: none;">Pet Id</h2>
+                <h5 id="petid9-display" >Pet ID: 35</h2>
+                <h2 id="petage9" style="display: none;">Pet Age</h2>
+                <h2 id="petname9">Pet Name</h2>
+                <span id="pettype9">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(10)" id = "pet10" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic10">
+                <h2 id="petid10" style="display: none;">Pet Id</h2>
+                <h5 id="petid10-display" >Pet ID: 35</h2>
+                <h2 id="petage10" style="display: none;">Pet Age</h2>
+                <h2 id="petname10">Pet Name</h2>
+                <span id="pettype10">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(11)" id = "pet11" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic11">
+                <h2 id="petid11" style="display: none;">Pet Id</h2>
+                <h5 id="petid11-display" >Pet ID: 35</h2>
+                <h2 id="petage11" style="display: none;">Pet Age</h2>
+                <h2 id="petname11">Pet Name</h2>
+                <span id="pettype11">Pet Type</span>
+            </div>
+            <div class="pet-cont-indv" onclick="viewpetModal(12)" id = "pet12" style="display: none;">
+                <img src="../../assets/img/emptypetpic.JPG" class="pet-pic" id="petpic12">
+                <h2 id="petid12" style="display: none;">Pet Id</h2>
+                <h5 id="petid12-display" >Pet ID: 35</h2>
+                <h2 id="petage12" style="display: none;">Pet Age</h2>
+                <h2 id="petname12">Pet Name</h2>
+                <span id="pettype12">Pet Type</span>
+            </div>
+        </div>
+        <div class="no-pets" id="nopets">
+            You currently don't have any pets.<br>Click "Add Pet" to add pets.
+        </div>
+    </div>
+
+    <div id="addpetmodal" class="modal">
+        <div class="modal-content">
+           <span class="close">&times;</span>
+           <h1>Add Pet</h1>
+           <div class="pet-dts">
+                <div class="pettab1">
+                    <img src="../../assets/img/emptypetpic.JPG" class="acc-pic" id="add-pet-pic" width="150">
+                    <button class="profbtn" id="upd-petpic">Upload<br>Pet's Photo</button>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;" required>
+                </div>
+                <div class="pettab2">
+                    <div class="cred-box">
+                        <label>Name</label>
+                        <form class="form-element">
+                            <input type="text" id="addpetname" placeholder="Enter pet's name">
+                        </form>
+                        <label>Pet Type</label>
+                        <form class="form-element">
+                            <input type="text" id="addpettype" placeholder="(e.g. dog, cat, etc.)">
+                        </form>
+                        <label>Pet Age</label>
+                        <form class="form-element">
+                            <input type="text" id="addpetage" placeholder="Enter pet's age">
+                        </form>
+                    </div>
+                    <div class="trailbuttons">
+                        <button class="ADDPET-BUTTON" id="add-pet-btn">Add Pet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewpetmodal" class="vmodal">
+        <div class="modal-content">
+           <span class="close1" id="close1">&times;</span>
+           <h1>Pet Details</h1>
+           <div class="pet-dts">
+                <div class="vpettab1">
+                    <img src="../../assets/img/emptypetpic.JPG" class="acc-pic" id="new-pet-pic" width="150">
+                    <button class="profbtn" id="new-petpic">Update<br>Pet's Photo</button>
+                    <input type="file" id="fileInput2" accept="image/*" style="display: none;" required>
+                </div>
+                <div class="vpettab2">
+                    <div class="cred-box">
+                        <label>Name</label>
+                        <div class="updcreds">
+                            <input type="text" id="newpetname" class="editableinput" value="Pet Name">
+                            <button class="profbtn" id="upd-petname">Update</button>
+                        </div>
+                        <label>Pet Type</label>
+                        <div class="updcreds">
+                            <input type="text" id="newpettype" class="editableinput" value="Pet Type">
+                            <button class="profbtn" id="upd-pettype">Update</button>
+                        </div>
+                        <label>Age</label>
+                        <div class="updcreds">
+                            <input type="text" id="newpetage" class="editableinput" value="Pet Age">
+                            <button class="profbtn" id="upd-petage">Update</button>
+                        </div>
+                    </div>
+                    <div class="trailbuttons">
+                        <button class="profbtn" id="remove-pet-btn">Remove Pet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <script>
+
+        var addpmodal = document.getElementById("addpetmodal");
+        var btn = document.getElementById("add-pet");
+        var viewpmodal = document.getElementById("viewpetmodal");
+
+        var span = document.getElementsByClassName("close")[0];
+        var span1 = document.getElementsByClassName("close1")[0];
+
+        var upd_pic = document.getElementById("upd-petpic");
+        var pic_selector = document.getElementById("fileInput");
+
+        var addpetbtn = document.getElementById("add-pet-btn");
+        //var petcount = 0;
+
+        const obj = {
+          _petcount: 0, 
+
+          get petcount() {
+            return this._petcount;
+          },
+
+          set petcount(value) {
+            this._petcount = value;
+            this.triggerChangeEvent();
+          },
+
+          triggerChangeEvent() {
+            if (this._petcount > 0){
+                document.getElementById("nopets").style = "display: none;";
+            } else {
+                document.getElementById("nopets").style = "";
+            }
+          }
+        };
+
+        var upd_petname = document.getElementById("upd-petname");
+        var upd_pettype = document.getElementById("upd-pettype");
+        var upd_petage = document.getElementById("upd-petage");
+        var upd_petpic = document.getElementById("upd-petpic");
+        var remove = document.getElementById("remove-pet-btn");
+
+        document.getElementById("fileInput2").addEventListener("change", function(){
+
+            if (document.getElementById("fileInput2").files.length > 0) {
+                //alert("hi");    
+                var file = document.getElementById("fileInput2").files[0];
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // Display the selected image in the preview
+                    document.getElementById("new-pet-pic").src = e.target.result;
+                    var base64Image = e.target.result.split(',')[1];
+                    //alert(petno);
+                    fetch('../../php/pet_update.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ photo: base64Image, petno: petno})
+                    })
+                    //.then(response => response.json())
+                    //.then(data => {
+                    //    alert(data.message);
+                    //    loadPage();
+                    //})
+                    //.catch(error => {
+                    //    console.error('Error:', error);
+                    //});
+
+                };
+                reader.readAsDataURL(file);
+                loadPage();
+                alert("Photo updated successfully!");
+            }   
+        })
+
+        var email;
+        var petno;
+      
+        btn.onclick = function() {
+            //alert(petcount)
+            if (obj.petcount == 12){
+                alert("Maximum number of pets reached!");
+                return 0;
+            }
+            addpmodal.style.display = "flex";
+            addpmodal.style.alignItems = "center";
+            addpmodal.style.justifyContent = "center";
+        }
+      
+        span.onclick = function() {
+            addpmodal.style.display = "none";
+        }
+      
+        span1.onclick = function() {
+            viewpmodal.style.display = "none";
+        }
+
+        function viewpetModal(id) {
+            viewpmodal.style.display = "flex";
+            viewpmodal.style.alignItems = "center";
+            viewpmodal.style.justifyContent = "center";
+            var petid = "petid" + id;
+            petno = document.getElementById(petid).textContent;
+            document.getElementById("newpetname").value = document.getElementById("petname" + id).textContent;
+            document.getElementById("newpettype").value = document.getElementById("pettype" + id).textContent;
+            document.getElementById("newpetage").value = document.getElementById("petage" + id).textContent;
+            document.getElementById("new-pet-pic").src = document.getElementById("petpic" + id).src;
+        }
+
+        function loadPage() {
+            // Check online status
+            fetch('../../php/check_status.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.email) {
+                    email = data.email;
+                    //alert(email);
+                    loadAcc(email);
+                }
+                 else if (data.error){
+                    window.location.href = 'sto.html'
+                    exit();
+                } else {
+
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+
+            
+        }
+
+        function loadAcc(email) {
+            fetch('../../php/loadpets.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        var i = 0;
+                        data.forEach(jsonString => {
+                            i++;
+                            var jsonObject = JSON.parse(jsonString);
+                            var fullString = "data:image/jpeg;base64/9j/4AAQSkZJRg...";
+                            var pfp = fullString.substring(fullString.indexOf(',') + 1);
+                            document.getElementById("pet" + i).style = '';
+                            document.getElementById("petid" + i).textContent = jsonObject.petno;
+                            document.getElementById("petid" + i + "-display").textContent = "PET ID: " + jsonObject.petno;
+                            document.getElementById("petname" + i).textContent = jsonObject.name;
+                            document.getElementById("pettype" + i).textContent = jsonObject.type;
+                            document.getElementById("petage" + i).textContent = jsonObject.age;
+                            document.getElementById("petpic" + i).src = "data:image/png;base64," + jsonObject.pfp;
+                        });
+                        obj.petcount = i;
+                    } else {
+                        obj.petcount = 0;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPage);
+        pic_selector.addEventListener("change", handleFileInput);
+        addpetbtn.addEventListener("click", function(){
+            var name = document.getElementById("addpetname").value;
+            var type = document.getElementById("addpettype").value;
+            var age = document.getElementById("addpetage").value;
+            var regex = /^\d+$/;
+
+            if (name == null || name == ''){
+                alert("Pet name cannot be empty!");
+                return 0;
+            } else if (age < 0 || age > 200 || !regex.test(age)){
+                alert("Allowed values for age are 0 to 200.");
+                return 0;
+            } else if (type == null || type == ''){
+                alert("Pet type cannot be empty!");
+                return 0;
+            }
+
+            if (fileInput.files.length > 0) {
+
+
+                var reader = new FileReader();
+
+                // Event listener for when the FileReader has read the file
+                reader.onload = function (event) {
+                    // Get the base64 encoded string
+                    var base64Image = event.target.result.split(',')[1];
+
+                    // Use the base64Image as needed
+                    console.log(base64Image);
+
+                    // Set the pfp variable here
+                    var pfp = base64Image;
+                    var profile = {
+                        pfp: pfp,
+                        name: name,
+                        type: type,
+                        age: age
+                    };
+
+                    fetch('../../php/addpet.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(profile)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Pet added successfully!");
+                            document.getElementById("addpetname").value = '';
+                            document.getElementById("addpettype").value = '';
+                            document.getElementById("addpetage").value = '';
+                            addpmodal.style.display = "none";
+                            loadPage();
+                            //window.location.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                };
+
+                // Read the file as a data URL (base64 encoding)
+                reader.readAsDataURL(fileInput.files[0]);
+
+            } else {
+                fetch("../../assets/img/emptypetpic.JPG")
+                .then(response => response.blob())
+                .then(blob => {
+                    // Create a new FileReader
+                    var reader = new FileReader();
+
+                    // Event listener for when the FileReader has read the blob
+                    reader.onload = function () {
+                        // Get the base64 encoded string
+                        var base64Image = reader.result.split(',')[1];
+                        
+                        // Example data
+                        var profile = {
+                            pfp: base64Image,
+                            name: name,
+                            type: type,
+                            age: age
+                        };
+
+                        // Make the fetch request
+                        fetch('../../php/addpet.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(profile)
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert("Pet added successfully!");
+                                    document.getElementById("addpetname").value = '';
+                                    document.getElementById("addpettype").value = '';
+                                    document.getElementById("addpetage").value = '';
+                                    addpmodal.style.display = "none";
+                                    loadPage();
+                                    //window.location.reload();
+                                } else {
+                                    alert(data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    };
+
+                    // Read the blob as a data URL (base64 encoding)
+                    reader.readAsDataURL(blob);
+
+                })
+            }
+        });
+
+        upd_pic.addEventListener('click', function(){
+            pic_selector.click()
+        })
+
+        function handleFileInput() {
+            var fileInput = document.getElementById("fileInput");
+
+            if (fileInput.files.length > 0) {
+                //alert("hi");    
+                var file = fileInput.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // Display the selected image in the preview
+                    document.getElementById("add-pet-pic").src = e.target.result;
+                    //alert(document.getElementById("pet-pic").src);
+                    //document.getElementById("previewContainer").style.display = "block";
+
+                    // Auto crop the largest square at the center of the image
+                    //autoCropImage(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                //alert("Please select a file.");
+            }
+        }
+
+        upd_petname.addEventListener('click', function (){
+            var newname = document.getElementById("newpetname").value;
+            if ( newname == null || newname == ''){
+                alert("Please enter a valid pet name!");
+                return 0;
+            }
+            fetch('../../php/pet_update.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: newname, petno: petno })
+            })
+            .then(response => response.json())
+            .then(data => {
+                    alert(data.message);
+                    loadPage();
+            })
+            .catch(error => {
+                //alert()
+                console.error('Error:', error);
+            });
+        });
+
+        upd_pettype.addEventListener('click', function (){
+            var newtype = document.getElementById("newpettype").value;
+            if ( newtype == null || newtype == ''){
+                alert("Please enter a valid pet type!");
+                return 0;
+            }
+            fetch('../../php/pet_update.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ type: newtype, petno: petno })
+            })
+            .then(response => response.json())
+            .then(data => {
+                    alert(data.message);
+                    loadPage();
+            })
+            .catch(error => {
+                //alert()
+                console.error('Error:', error);
+            });
+        });
+
+        upd_petage.addEventListener('click', function (){
+            var newage = document.getElementById("newpetage").value;
+            var regex = /^[0-9]+$/;
+            if (!regex.test(newage) || newage < 0 || newage > 200){
+                alert("Please enter a valid age! Include numeric characters between 0 and 200 only");
+                return 0;
+            }
+            fetch('../../php/pet_update.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ age: newage, petno: petno })
+            })
+            .then(response => response.json())
+            .then(data => {
+                    alert(data.message);
+                    loadPage();
+            })
+            .catch(error => {
+                //alert()
+                console.error('Error:', error);
+            });
+        });
+
+        document.getElementById("new-petpic").addEventListener('click', function(){
+            //alert("hhah");
+            document.getElementById("fileInput2").click();
+        })
+
+        remove.addEventListener('click', function() {
+            var confirm = window.confirm("Are you sure you want to remove this pet?");
+            if (confirm){
+                fetch('../../php/pet_delete.php',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ petno: petno })
+                })
+                .then(response => response.json())
+                .then(data => {
+                        alert(data.message);
+                        window.location.reload()
+                        //loadPage();
+                })
+                .catch(error => {
+                    //alert()
+                    console.error('Error:', error);
+                });
+                //document.getElementById("close1").click();
+            } else {
+                return 0;
+            }
+
+        });
+    </script>
+</body>

@@ -1,0 +1,441 @@
+/* font imports */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-padding-top: 2rem;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --blue-color: #243c5f;
+    --l-blue: #819ac0 ;
+    --text-color: #151a1d;
+    --bg-color: #FFFFFF;
+}
+
+html{
+    overflow: hidden;
+}
+
+img {
+    width: 100%
+}
+
+body {
+    color: var(--text-color);
+    background: var(--l-blue);
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+section {
+    padding: 4.5rem 0 1.5rem;
+}
+h1 {
+    color: var(--blue-color);
+}
+h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-color);
+    box-shadow: 0 8px 11px rgb(14 55 54/ 10%);
+    padding: 20px 100px;
+    transition: 0.5s;
+}
+
+
+/*SIDEBAR*/
+#dash-icon {
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+}
+.sidebar {
+    position: sticky;
+    left: 0;
+    min-width: 270px;
+    height: 100vh;
+    background: var(--bg-color);
+    box-shadow: 8px 8px 30px rgb(14 55 54/ 25%);
+    overflow: hidden;
+    transition: all 0.5s linear;
+}
+.lbl {
+    font-size: 20px;
+    color: var(--bg-color);
+    text-align: center;
+    line-height: 70px;
+    background-color: var(--blue-color);
+    user-select: none;
+    box-shadow: 0 2px 5px rgb(126, 126, 126, 0.3);
+    margin-bottom: 10px;
+}
+.sidebar ul a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 55px;
+    font-size: 17px;
+    color: var(--blue-color);
+    padding-left: 40px;
+    box-sizing: border-box;
+}
+.sidebar ul a:hover {
+    transition: 0.1s all linear;
+    color: var(--bg-color);
+    padding-left: 50px;
+    background: var(--l-blue);
+}
+.sidebar button {
+    font-size: 17px;
+    background: var(--bg-color);
+    color: var(--blue-color);
+    border: none;
+    padding-right: 115px;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 55px;
+}
+.sidebar button:hover {
+    transition: 0.1s all linear;
+    padding-left: 15px;
+    background: var(--l-blue);
+    color: var(--bg-color);
+    cursor: pointer;
+}
+#check {
+    display: none;
+}
+label #dashbtn,
+label #clobtn {
+    position: absolute;
+    cursor: pointer;
+}
+.container {
+    width: 80%;
+    height: 100%;
+    min-height: 850px;
+    max-height: 850px;
+    padding: 30px;
+    margin: 0;
+    padding: 3%;
+    /*margin-top: 3%;
+    margin-bottom: 3%;*/
+    border-radius: 2rem;
+    background-color: var(--bg-color);
+    display: block;
+    margin-right: 2vw;
+    box-shadow: 5px 2px 10px rgb(126, 126, 126, 0.2);
+    overflow-y: hidden;
+}
+input {
+    border: none;
+    border-bottom: 1px solid var(--blue-color);
+    font-size: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 250px;
+}
+
+/*CLIENT MANAGER*/
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+} 
+  /* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    /*margin: 15% auto; /* 15% from the top and centered */
+    padding: 60px;
+    width: 800px; /* Could be more or less, depending on screen size */
+    border-radius: 3rem;
+}
+  
+  /* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover {
+    color: #7c7c7c;
+    cursor: pointer;
+}
+
+
+/* CLIENT MANAGER */
+.client-table {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    margin-top: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.vet-table {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    margin-top: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 80px;
+}
+thead {
+    font-size: 20px;
+    background: var(--l-blue);
+    color: var(--bg-color);
+}
+th {
+    padding: 15px;
+    text-align: center;
+    font-weight: 400;
+}
+.climngbuttons {
+    gap: 10px;
+    display: fixed;
+}
+#blockclient {
+    background: rgb(206, 97, 97);
+}
+#blockclient:hover {
+    background: rgb(248, 139, 139);
+}
+#removevet {
+    background: rgb(206, 97, 97);
+}
+#removevet:hover {
+    background: rgb(248, 139, 139);
+}
+tbody {
+    background: var(--bg-color);
+}
+tbody img {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 40px;
+}
+td {
+    padding: 15px;
+    font-size: 14px;
+    min-width: 150px;
+    color: var(--text-color);
+    text-align: center;
+    cursor: default;
+}
+tbody tr td button {
+    border: none;
+    padding: 10px;
+    border-radius: 3rem;
+    text-align: center;
+    color: #FFFFFF;
+    background: #243c5f;
+}
+tbody tr td button:hover {
+    transition: 0.2s all linear;
+    background: var(--l-blue);
+    cursor: pointer;
+}
+#tablebody tr:hover {
+    transition: 0.2s all linear;
+    background: #dbdbdb;
+}
+tr:nth-child(even) {
+    background: #dfe7f1;
+}
+tfoot {
+    background: #243c5f;
+}
+/*VIEW CLIENT MODAL*/
+.cli-dts {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+}
+.acc-pic {
+    position: relative;
+    object-fit: cover;
+    border-radius: 175px;
+    max-width: 250px;
+    min-width: 250px;
+    height: 250px;
+    padding: 30px;
+}
+/*VIEW HISTORY MODAL*/
+#display-client-name {
+    font-weight: 600;
+    font-size: 17px;
+}
+.history-table thead {
+    min-width: 400px;
+}
+.history-table tr {
+    width: fit-content;
+    font-size: 15px;
+}
+.history-table {
+    width: 100%;
+    height: 450px;
+    margin-top: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+/*VET MANAGER*/
+.vetmngr-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.btn {
+    width: 150px;
+    border: none;
+    background: var(--blue-color);
+    color: var(--bg-color);
+    font-size: 17px;
+    border-radius: 2rem;
+}
+.btn:hover {
+    transition: 0.2s all linear;
+    background: var(--l-blue);
+    cursor: pointer;
+}
+.btns {
+    width: 150px;
+    border: none;
+    background: var(--blue-color);
+    color: var(--bg-color);
+    font-size: 17px;
+    padding: 15px;
+    border-radius: 2rem;
+}
+.btns:hover {
+    transition: 0.2s all linear;
+    background: var(--l-blue);
+    cursor: pointer;
+}
+.profbtn {
+    width: auto;
+    border-radius: 3rem;
+    border: 1px solid var(--l-blue);
+    background: none;
+    color: var(--l-blue);
+    padding: 8px;
+    justify-content: right;
+}
+.profbtn:hover {
+    background: var(--l-blue);
+    color: var(--bg-color);
+    cursor: pointer;
+}
+.clitab1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/*APPOINTMENT MANAGER*/
+.pending-table {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    margin-top: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+#reject-appt {
+    background: rgb(206, 97, 97);
+}
+#reject-appt:hover {
+    background: rgb(248, 139, 139);
+}
+.res-dts {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+.restab1 {
+    border: 1px solid var(--l-blue);
+    border-radius: 25px;
+    padding: 15px;
+}
+.restab1 label {
+    color: var(--blue-color);
+}
+.resdts {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.restab2 label {
+    color: var(--blue-color);
+}
+.resdts1 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+#datesetterpicker {
+    margin-left: 700px;
+}
+.tinymodal-content {
+    background-color: #fefefe;
+    /*margin: 15% auto; /* 15% from the top and centered */
+    padding: 60px;
+    width: 400px; /* Could be more or less, depending on screen size */
+    border-radius: 1rem;
+}
+.rem-dts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bigtb {
+    border: 1px solid var(--l-blue);
+    border-radius: 15px;
+    padding: 15px;
+    max-height: 300px;
+    min-height: 250px;
+    width: 450px;
+    overflow-y: scroll;
+    margin: 15px;
+}
+
+/*CAL*/
+.calmodal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 60px;
+    width: fit-content; /* Could be more or less, depending on screen size */
+    border-radius: 3rem;
+}

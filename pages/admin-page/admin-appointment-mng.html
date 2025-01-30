@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>VetVisit Web App</title>
+    <link rel="icon" href="../../assets/img/VetVisitIcon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <link rel="stylesheet" href="../../styles/adminstyles.css">
+
+    <link rel="stylesheet" href="../../styles/admin-calstyles.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <!--SIDEBAR HIDER-
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i class='bx bxs-menu' id="dashbtn"></i>
+        <i class='bx-x' id="clobtn"></i>
+    </label>-->
+    <!--SIDEBAR-->
+    <div class="sidebar">
+        <div class="lbl"><i class='bx bxs-clinic'></i> Admin</a></div>
+        <ul>
+            <li><a href="admin-appointment-mng.html">Appointment Manager</a></li>
+            <li><a href="admin-client-mng.html">Client Manager</a></li>
+        </ul>
+        <button id="logout">Log Out</button>
+    </div>
+
+    <div class="container">
+        <h1 class="mngr-title">Appointment Manager<!--<button class="profbtn" id="datesetterpicker">Enable / Disable Dates</button>--></h1>
+        <p>Pending Approvals...</p>
+        <div class="pending-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Appointment ID</th>
+                        <th>Time Slot</th>
+                        <th>Client</th>
+                        <th>Veterinarian</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    <tbody id = "tablebody">
+                        <!--
+                        <tr>
+                            <td>17 January 2025</td>
+                            <td>10:00 AM - 11:00 AM</td>
+                            <td>Choi Beomgyu</td>
+                            <td>Dr. James Barr</td>
+                            <td>Pending</td>
+                            <td id="climngbuttons">
+                                <button id="view-appt-dts">View Details</button>
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div id="viewpayformmodal" class="modal">
+        <div class="modal-content">
+           <span class="close" id="close1">&times;</span>
+           <h1>Client's Payment Details</h1>
+           <div class="res-dts">
+                <div class="restab1">
+                    <label>Reference Number:</label>
+                    <div class="resdts" id="refnum1">2021-7128273</div>
+                    <label>Date:</label>
+                    <div class="resdts" id="res-date1">14 January 2025</div>
+                    <label>Time Slot:</label>
+                    <div class="resdts" id="res-timeslot">10:00 AM - 11:00 AM</div>
+
+                    <button class="profbtn" id="viewpop">- View Proof of Payment -</button>
+                </div>
+                <div class="restab2">   
+                    <div class="cred-box">
+                        <label>Name of Sender:</label>
+                        <div class="resdts1" id="ref-name1">Choi Beomgyu</div>
+                        <label>Account/Phone Number:</label>
+                        <div class="resdts1" id="res-accno1">09123456879</div>
+                        <label>Reference Number:</label>
+                        <div class="resdts1" id="res-refno1">0-JSD-154512</div>
+                        <label>Time Sent:</label>
+                        <div class="resdts1" id="res-ptime1">10:50 PM</div>
+                        
+                        <button class="btns" id="reject-appt">Reject</button>
+                        <button class="btns" id="approve-appt">Approve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewpopmodal" class="modal" >
+        <div class="tinymodal-content">
+           <span class="close" id="close3">&times;</span>
+           <h1>Proof of Payment</h1>
+           <div class="res-dts">
+                <img id="poppop" src="../../assets/img/aboutpic.png">
+            </div>
+        </div>
+    </div>
+
+    <div id="remarksmodal" class="modal">
+        <div class="modal-content">
+           <span class="close" id="close2">&times;</span>
+           <h1>Remarks</h1>
+           <div class="rem-dts">
+                <!--<input id="remarksbox" class="bigtb" type="text">-->
+                <textarea rows="5" class="bigtb" type="text" placeholder="Enter remarks here"></textarea>
+                <button id="subremarks" class="btns">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="calsetmodal" class="modal">
+        <div class="calmodal-content">
+           <span class="close" id="close4">&times;</span>
+           <h1>Calendar</h1>
+           <div class="rem-dts">
+                <input type="date" id="date">
+            </div>
+            <button class="profbtn" id="enablebtn">Enable</button>
+            <button class="profbtn" id="disablebtn">Disable</button>
+        </div>
+    </div>
+  
+
+    <script>
+
+        var receiptSrc;
+        var referId;
+        function loadPage() {
+      // Check online status
+      fetch('../../php/check_status.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.email) {
+          email = data.email;
+          //alert(email);
+          //loadAcc(email);
+        }
+        else if (data.error){
+          window.location.href = 'sto.html'
+          exit();
+        } else {
+
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });   
+    }
+    loadPage();
+
+        function loadappt(){
+            fetch('../../php/admin_appt.php')
+            .then(response => response.json())
+            .then(data => {
+                    var i = 0;
+                    data.forEach(jsonString => {
+                        i++;
+                        var jsonObject = JSON.parse(jsonString);
+                        // Assuming you have a tbody element with the id "tablebody"
+                        var tableBody = document.getElementById("tablebody");
+
+                        // Example data for a new row
+                        var newRowData = {
+                            adate: jsonObject.adate,
+                            id: jsonObject.id,
+                            atime: jsonObject.atime,
+                            name: jsonObject.name,
+                            vet: jsonObject.vet,
+                            status: jsonObject.status,
+                            refno: jsonObject.refno,
+                            accno: jsonObject.accno,
+                            ptime: jsonObject.ptime,
+                            receipt: jsonObject.receipt
+                        };
+
+                        // Create a new row
+                        var newRow = document.createElement("tr");
+
+                        // Create cells for the new row and set their content
+                        for (var key in newRowData) {
+                            if(key == 'refno'){
+                                break;
+                            }
+                            var cell = document.createElement("td");
+                            cell.id = key + i;
+                            cell.textContent = newRowData[key];
+                            newRow.appendChild(cell);
+                        }
+
+                        // Create a cell for the "View Details" button
+                        var buttonCell = document.createElement("td");
+                        //var viewProfileButton = document.createElement("button");
+                        var details = document.createElement("button");
+                        //var blockButton = document.createElement("button");
+                        details.textContent = 'View Details';
+                        details.id = "view-app-dts";
+                        details.addEventListener("click", (function(index) {
+
+                            return function() {
+                                //alert("hi")
+                                referId = newRowData.id;
+                                document.getElementById("viewpayformmodal").style.display= "flex";
+                                document.getElementById("viewpayformmodal").style.alignItems = "center";
+                                document.getElementById("viewpayformmodal").style.justifyContent = "center";
+                                document.getElementById("refnum1").textContent = newRowData.refno;
+                                document.getElementById("res-date1").textContent = newRowData.adate;
+                                document.getElementById("res-timeslot").textContent = newRowData.atime;
+                                document.getElementById("ref-name1").textContent = newRowData.name;
+                                document.getElementById("res-accno1").textContent = newRowData.accno;
+                                document.getElementById("res-refno1").textContent = newRowData.refno;
+                                document.getElementById("res-ptime1").textContent = newRowData.ptime;
+                                receiptSrc = "data:image/png;base64," + newRowData.receipt;
+
+                            };
+                        })(i));
+
+                        buttonCell.appendChild(details);
+/*
+                        var blockButton = document.createElement("button");
+                        //var blockButton = document.createElement("button");
+                        blockButton.textContent = 'Block';
+                        blockButton.classList.add("redbutt");
+                        blockButton.id = "blockclient";
+                        blockButton.addEventListener("click", (function(index) {
+                            return function() {
+
+                                window.confirm("Are you sure you want to block this client?")
+                            
+                            
+
+
+
+                            };
+                        })(i));*/
+                        //buttonCell.appendChild(blockButton);
+                        newRow.appendChild(buttonCell);
+                        // Append the new row to the table body
+                        tableBody.appendChild(newRow);
+                    });
+
+
+
+                })
+        }
+
+        loadappt();
+
+        document.getElementById("viewpop").addEventListener('click',function(){
+            document.getElementById("viewpopmodal").style.display = "flex";
+            document.getElementById("viewpopmodal").style.alignItems = "center";
+            document.getElementById("viewpopmodal").style.justifyContent = "center";
+            document.getElementById("poppop").src = receiptSrc;
+        })
+
+        document.getElementById("close3").addEventListener('click', function(){
+            document.getElementById("viewpopmodal").style.display = "none";
+        })
+
+        document.getElementById("close1").addEventListener('click', function(){
+            document.getElementById("viewpayformmodal").style.display = "none";
+        })
+
+        document.getElementById("approve-appt").addEventListener('click', function(){
+            //alert(referId);
+            fetch('../../php/approve-appt.php',{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({referId: referId, status: 'Approved'})
+            })
+            alert("Payment Approved!");
+            location.reload();
+        })
+
+        document.getElementById("reject-appt").addEventListener('click', function(){
+            //alert(referId);
+            fetch('../../php/reject-appt.php',{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({referId: referId, status: 'Rejected'})
+            })
+            alert("Payment Rejected!");
+            location.reload()
+        })
+    
+    </script>
+    <script src="../../scripts/logout.js"></script>
+    
+    
+    
+</body>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>VetVisit Web App</title>
+    <link rel="icon" href="../../assets/img/VetVisitIcon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <link rel="stylesheet" href="../../styles/clientstyles.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <!--SIDEBAR HIDER-->
+    <!--<input type="checkbox" id="check">
+    <label for="check">
+        <i class='bx bxs-menu' id="dashbtn"></i>
+        <i class='bx-x' id="clobtn"></i>
+    </label>-->
+    <!--SIDEBAR-->
+    <div class="sidebar">
+        <div class="lbl"><i class='bx bxs-clinic'></i> VetVisit</a></div>
+        <ul>
+            <li><a href="client-cal.html">Book Appointment</a></li>
+            <li><a href="client-history.html">History</a></li>
+            <li><a href="client-pets.html">My Pets</a></li>
+            <li><a href="client-account.html">Account</a></li>
+        </ul>
+        <button id="logout">Log Out</button>
+    </div>
+    
+    <!--ACCOUNT DETAILS-->
+    <div class="container">
+        <h1>Account</h1>
+        <div class="acc-body">
+            <div class="profiletab1">
+                <img src="../../assets/img/cliid.jpg" class="acc-pic" id="acc-pic" width="150">
+                <button class="profbtn" id="upd-pfp">Change Profile Photo</button>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;" required>
+            </div>
+            <div class="profiletab2">
+                <div class="cred-box">
+                    <label>Name</label>
+                    <div class="updcreds" >
+                        <input type="text" id="client-name"class="editableinput" value="Choi Beomgyu">
+                        <button class="profbtn" id="upd-cliname">Update</button>
+                    </div>
+                    <label>Contact No.</label>
+                    <div class="updcreds" >
+                        <input type="text" id="client-contactno" class="editableinput" value="09123456789">
+                        <button class="profbtn" id="upd-clino">Update</button>
+                    </div>
+                    <label>Email</label>
+                    <div class="updcreds" >
+                        <input type="text" id="client-email" class="editableinput" value="bamgyuuuu@txt.com" disabled>
+                        <button class="profbtn" id="upd-cliemail" style="display: none;">Update</button>
+                    </div>
+                </div>
+                <div class="trailbuttons">
+                    <button class="profbtn" id="changepw">Change Password</button>
+                    <button class="profbtn" id="delacc">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--UPDATE PASSWORD-->
+    <div id="cpw-modal" class="modal">
+        <div class="modal-content">
+           <span class="close" id="close0">&times;</span>
+           <h1>Change Password</h1>
+           <div class="update-tabs">
+                <div class="cont-upd">
+                    <label>Old Password</label>
+                    <form class="form-element">
+                        <input type="text" id="password" placeholder="Old Password">
+                    </form>
+                </div>
+                <div class="cont-upd">
+                    <label>New Password</label>
+                    <form class="form-element">
+                        <input type="text" id="newpw" placeholder="New Password">
+                    </form>
+                </div>
+                <div class="cont-upd">
+                    <label>Reenter Password</label>
+                    <form class="form-element">
+                        <input type="password" id="renewpw" placeholder="Reenter New Password">
+                    </form>
+                </div>
+                <div class="trailbuttons">
+                    <button class="profbtn" id="cli-changepw">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        // CHANGE PASSWORD
+        var cpwmodal = document.getElementById("cpw-modal");
+        var cpwbtn = document.getElementById("changepw");
+        var span3 = document.getElementById("close0");
+
+        cpwbtn.onclick = function() {
+            cpwmodal.style.display = "block";
+        }
+
+        span3.onclick = function() {
+            cpwmodal.style.display = "none";
+        }
+
+        var lgt = document.getElementById("logout");
+        var pfp;
+        var name;
+        var email;
+        var contact;
+        var upd_name = document.getElementById("upd-cliname");
+        var upd_email = document.getElementById("upd-cliemail");
+        var upd_contact = document.getElementById("upd-clino");
+        var upd_pw = document.getElementById("cli-changepw");
+
+        function loadPage() {
+            // Check online status
+            fetch('../../php/check_status.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.email) {
+                    email = data.email;
+                    //alert(email);
+                    loadAcc(email);
+                }
+                 else if (data.error){
+                    window.location.href = 'sto.html'
+                    exit();
+                } else {
+
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPage);
+        document.getElementById("upd-pfp").addEventListener("click", openFileInput);
+        document.getElementById("fileInput").addEventListener("change", handleFileInput);
+
+        function upd_pfp(){
+            var reader = new FileReader();
+            var file = document.getElementById("fileInput").files[0];
+
+            // Event listener for when the FileReader has read the file
+            reader.onload = function (event) {
+                // Get the base64 encoded string
+                var base64Image = event.target.result.split(',')[1];
+
+                // Use the base64Image as needed
+                console.log(base64Image);
+
+                // Set the pfp variable here
+                var pfp = base64Image;
+
+                // Make the fetch request
+                fetch('../../php/profile_update.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({pfp: pfp})
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        loadPage();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            };
+
+            // Read the file as a data URL (base64 encoding)
+            reader.readAsDataURL(file);
+        }
+
+        function openFileInput() {
+            // Trigger file input click
+            document.getElementById("fileInput").click();
+            //handleFileInput();
+        }
+
+        function handleFileInput() {
+
+            var fileInput = document.getElementById("fileInput");
+
+            if (fileInput.files.length > 0) {
+                //alert("hi");
+                var file = fileInput.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // Display the selected image in the preview
+                    document.getElementById("acc-pic").src = e.target.result;
+                    //document.getElementById("previewContainer").style.display = "block";
+
+                    // Auto crop the largest square at the center of the image
+                    //autoCropImage(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                //alert("Please select a file.");
+            }
+
+            upd_pfp();
+        }
+
+        function loadAcc(email){
+
+            fetch('../../php/loadacc.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email})
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                pfp = data.pfp;
+                name = data.name;
+                email = data.email;
+                contact = data.contact;
+                var str = "data:image/png;base64," + pfp 
+
+                //alert(data.pfp);
+                console.log(data.pfp);
+                document.getElementById("client-name").value = name;
+                document.getElementById("client-email").value = email;
+                document.getElementById("client-contactno").value = contact;
+                document.getElementById("acc-pic").src = str ;
+                
+
+            })
+            .catch(error => {
+                //alert()
+                console.error('Error:', error);
+            });
+        }
+
+
+        upd_name.addEventListener('click', function (){
+            var newname = document.getElementById("client-name").value;
+            fetch('../../php/profile_update.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: newname })
+            })
+            .then(response => response.json())
+            .then(data => {
+                    alert(data.message);
+                    loadPage();
+            })
+            .catch(error => {
+                //alert()
+                console.error('Error:', error);
+            });
+        });
+
+        upd_email.addEventListener('click', function (){
+            var newemail = document.getElementById("client-email").value;
+            const emailPattern =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if (!emailPattern.test(newemail)){
+                alert("Please enter a valid email!");
+                return 0;
+            }
+            fetch('../../php/profile_update.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: newemail })
+            })
+            .then(response => response.json())
+            .then(data => {
+                    alert(data.message);
+                    loadPage();
+            })
+            .catch(error => {
+                //alert()
+                console.error('Error:', error);
+            });
+        });
+
+        upd_contact.addEventListener('click', function (){
+            var newcontact = document.getElementById("client-contactno").value;
+            var regex = /^[0-9]+$/;
+            if (!regex.test(newcontact)){
+                alert("Please enter a valid contact number! Include numeric characters only.");
+                return 0;
+            }
+            fetch('../../php/profile_update.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ contact: newcontact })
+            })
+            .then(response => response.json())
+            .then(data => {
+                    alert(data.message);
+                    loadPage();
+            })
+            .catch(error => {
+                //alert()
+                console.error('Error:', error);
+            });
+        });
+
+        upd_pw.addEventListener('click', function (){
+            var pw = document.getElementById("password").value;
+            var newpw = document.getElementById("newpw").value;
+            var renewpw = document.getElementById("renewpw").value;
+            const passwordPattern = /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/;
+            if (!passwordPattern.test(newpw) || newpw.length < 8){
+                alert("Please enter a valid new password! It should be at least 8 characters long and should have at least 1 uppercase, 1 lowercase, and 1 number.");
+                return 0;
+            }
+
+            if (newpw === renewpw){
+
+                fetch('../../php/profile_update.php',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ oldpassword: pw, newpassword: newpw })
+                })
+                .then(response => response.json())
+                .then(data => {
+                        alert(data.message);
+                        loadPage();
+                        if( data.message === 'Successfully updated.'){
+                            cpwmodal.style.display = "none";
+                        }
+                })
+                .catch(error => {
+                    //alert()
+                    console.error('Error:', error);
+                });
+
+            } else{
+                alert("Reentered password does not match.");
+            }
+            
+        });
+        function delaccount(){
+            let answer = window.prompt("Are you sure you want to delete your account? You won't be able to retrieve your data afterwards. Please type your password to proceed:");
+            if (answer == null || answer == ""){
+                return 0;
+            }
+            fetch("../../php/delacc.php",{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password : answer })
+            })
+            .then(response => response.json())
+            .then(data => {
+                    if(data.error){
+                        delaccount();
+                    } else{
+                        alert("Account successfully deleted!");
+                        window.location.href = "../../index.html"
+                    }
+            })
+            .catch(error => {
+                //alert()
+                console.error('Error:', error);
+            });
+
+        }
+
+        document.getElementById("delacc").addEventListener('click', delaccount);
+
+    </script>
+    <script src="../../scripts/logout.js"></script>
+</body>

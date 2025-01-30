@@ -1,0 +1,398 @@
+/* font imports */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-padding-top: 2rem;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --blue-color: #243c5f;
+    --l-blue: #819ac0 ;
+    --text-color: #151a1d;
+    --bg-color: #FFFFFF;
+}
+
+img {
+    width: 100%
+}
+
+body {
+    color: var(--text-color);
+    background: var(--l-blue);
+    display: flex;
+}
+
+section {
+    padding: 4.5rem 0 1.5rem;
+}
+h1 {
+    color: var(--blue-color);
+}
+h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-color);
+    box-shadow: 0 8px 11px rgb(14 55 54/ 10%);
+    padding: 20px 100px;
+    transition: 0.5s;
+}
+
+
+/*SIDEBAR*/
+#dash-icon {
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+}
+.sidebar {
+    position: sticky;
+    left: 0;
+    min-width: 270px;
+    height: 120vh;
+    background: var(--bg-color);
+    box-shadow: 8px 8px 30px rgb(14 55 54/ 25%);
+    overflow: hidden;
+    transition: all 0.5s linear;
+}
+.lbl {
+    font-size: 20px;
+    color: var(--bg-color);
+    text-align: center;
+    line-height: 70px;
+    background-color: var(--blue-color);
+    user-select: none;
+    box-shadow: 0 2px 5px rgb(126, 126, 126, 0.3);
+    margin-bottom: 10px;
+}
+.sidebar ul a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 55px;
+    font-size: 17px;
+    color: var(--blue-color);
+    padding-left: 40px;
+    box-sizing: border-box;
+}
+.sidebar ul a:hover {
+    transition: 0.1s all linear;
+    color: var(--bg-color);
+    padding-left: 50px;
+    background: var(--l-blue);
+}
+.sidebar button {
+    font-size: 17px;
+    background: var(--bg-color);
+    color: var(--blue-color);
+    border: none;
+    padding-right: 115px;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 55px;
+}
+.sidebar button:hover {
+    transition: 0.1s all linear;
+    padding-left: 15px;
+    background: var(--l-blue);
+    color: var(--bg-color);
+    cursor: pointer;
+}
+#check {
+    display: none;
+}
+label #dashbtn,
+label #clobtn {
+    position: absolute;
+    cursor: pointer;
+}
+.container {
+    width: 80%;
+    min-height: 850px;
+    max-height: 850px;
+    padding: 30px;
+    margin: auto;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 2rem;
+    background-color: var(--bg-color);
+    display: block;
+    box-shadow: 5px 2px 10px rgb(126, 126, 126, 0.2);
+    overflow-y: hidden;
+}
+input {
+    border: none;
+    border-bottom: 1px solid var(--blue-color);
+    font-size: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 250px;
+}
+
+/*ACCOUNT*/
+.acc-body {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 80px;
+    justify-content: left;
+}
+.acc-body label {
+    font-weight: 300;
+    color: #243c5f;
+    padding-top: 20px;
+}
+.acc-pic {
+    position: relative;
+    object-fit: cover;
+    border-radius: 175px;
+    max-width: 250px;
+    min-width: 250px;
+    height: 250px;
+    padding: 30px;
+}
+.profiletab1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profiletab2 {
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    column-gap: 0.5rem;
+    justify-content: space-between;
+}
+.cred-box .profbtn {
+    width: 80px;
+    border: 1px solid var(--l-blue);
+    background: none;
+    color: var(--l-blue);
+    justify-content: right;
+}
+.cred-box .profbtn:hover {
+    background: var(--l-blue);
+    color: var(--bg-color);
+}
+.trailbuttons {
+    flex-direction: row;
+    justify-content: space-between;
+}
+#changepw {
+    width: 150px;
+    align-self: center;
+}
+.creds {
+    display: flex;
+    column-gap: 20px;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--l-blue);
+    justify-content: space-between;
+}
+.cred-box {
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.profbtn {
+    width: 150px;
+    border: none;
+    padding: 10px;
+    border-radius: 3rem;
+    text-align: center;
+    color: #FFFFFF;
+    background: #243c5f;
+}
+.profbtn:hover {
+    transition: 0.2s all linear;
+    background: var(--l-blue);
+    cursor: pointer;
+}
+.update-tabs {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.update-tabs label {
+    color: var(--blue-color);
+    display: flex;
+}
+.cont-upd {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    column-gap: 1rem;
+    justify-items: left;
+}
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+} 
+  /* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 60px;
+    width: 800px; /* Could be more or less, depending on screen size */
+    border-radius: 3rem;
+}
+  
+  /* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover {
+    color: #7c7c7c;
+    cursor: pointer;
+}
+
+
+/* CLIENT MANAGER */
+.client-table {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    margin-top: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 80px;
+}
+thead {
+    font-size: 20px;
+    background: var(--l-blue);
+    color: var(--bg-color);
+}
+th {
+    padding: 15px;
+    text-align: center;
+    font-weight: 400;
+}
+.climngbuttons {
+    gap: 10px;
+    display: fixed;
+}
+#blockclient {
+    background: rgb(206, 97, 97);
+}
+#blockclient:hover {
+    background: rgb(248, 139, 139);
+}
+tbody {
+    background: var(--bg-color);
+}
+tbody img {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 40px;
+}
+td {
+    padding: 15px;
+    font-size: 14px;
+    min-width: 150px;
+    color: var(--text-color);
+    text-align: center;
+    cursor: default;
+}
+tbody tr td button {
+    border: none;
+    padding: 10px;
+    border-radius: 3rem;
+    text-align: center;
+    color: #FFFFFF;
+    background: #243c5f;
+}
+tbody tr td button:hover {
+    transition: 0.2s all linear;
+    background: var(--l-blue);
+    cursor: pointer;
+}
+#tablebody tr:hover {
+    transition: 0.2s all linear;
+    background: #dbdbdb;
+}
+tr:nth-child(even) {
+    background: #dfe7f1;
+}
+tfoot {
+    background: #243c5f;
+}
+/*VIEW CLIENT MODAL*/
+.cli-dts {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+}
+/*VIEW HISTORY MODAL*/
+#display-client-name {
+    font-weight: 600;
+    font-size: 17px;
+}
+.history-table thead {
+    min-width: 400px;
+}
+.history-table tr {
+    width: fit-content;
+    font-size: 15px;
+}
+.history-table {
+    width: 100%;
+    height: 450px;
+    margin-top: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.avail {
+    font-size: 20px;
+    margin-left: 30px;
+}
+.timeslot-for-vam {
+    font-weight: 600;
+}
+.client-name-for-vam {
+    font-weight: 400;
+}
+.btntrail {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 250px;
+}
+.btntrail .redbutt {
+    background: rgb(216, 92, 92);
+}
+.btntrail .redbutt:hover {
+    transition: 0.2s all linear;
+    background: rgb(233, 129, 129);
+}

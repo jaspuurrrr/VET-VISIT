@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>VetVisit Web App</title>
+    <link rel="icon" href="../../assets/img/VetVisitIcon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <link rel="stylesheet" href="../../styles/adminstyles.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <!--SIDEBAR HIDER-->
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i class='bx bxs-menu' id="dashbtn"></i>
+        <i class='bx-x' id="clobtn"></i>
+    </label>
+    <!--SIDEBAR-->
+    <div class="sidebar">
+        <div class="lbl"><i class='bx bxs-clinic'></i> Admin</a></div>
+        <ul>
+            <li><a href="admin-appointment-mng.html">Appointment Manager</a></li>
+            <li><a href="admin-client-mng.html">Client Manager</a></li>
+            <li><a href="admin-vet-mngr.html">Vet Manager</a></li>
+        </ul>
+        <button id="logout">Log Out</button>
+    </div>
+
+    <div class="container">
+        <div class="vetmngr-head">
+            <h1>Vet Manager</h1>
+            <button class="btn" id="add-vet">Add Vet</button>
+        </div>
+        <div class="vet-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact No.</th>
+                        <th></th>
+                    </tr>
+                    <tbody id = "tablebody">
+                        <tr>
+                            <td><img src="../../assets/vets/03.PNG"></th>
+                            <td>Choi Beomgyu</th>
+                            <td>bamgyuuu@txt.com</th>
+                            <td>09123456789</th>
+                            <td id="climngbuttons">
+                                <button id="view-vetprofile">Profile</button>
+                                <button id="view-vethistory">History</button>
+                                <button id="removevet">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div id="viewvetmodal" class="modal">
+        <div class="modal-content">
+           <span class="close" id="close1">&times;</span>
+           <h1>Vet Profile</h1>
+           <div class="cli-dts">
+                <div class="clitab1">
+                    <img src="../../assets/vets/03.PNG" class="acc-pic" id="acc-pic" width="150">
+                </div>
+                <div class="clitab2">   
+                    <div class="cred-box">
+                        <label>Name</label>
+                        <div class="updcreds">
+                            <input type="text" id="vet-name" class="editableinput" value="Cliietn">
+                            <button class="profbtn" id="upd-vetname">Update</button>
+                        </div>
+                        <label>Email</label>
+                        <div class="updcreds">
+                            <input type="text" id="vet-email" class="editableinput" value="clio@jp.com">
+                            <button class="profbtn" id="upd-vetemail">Update</button>
+                        </div>
+                        <label>Age</label>
+                        <div class="updcreds">
+                            <input type="text" id="vet-contactno" class="editableinput" value="0314564685">
+                            <button class="profbtn" id="upd-vetcontact">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="vethistorymodal" class="modal">
+        <div class="modal-content">
+           <span class="close" id="close2">&times;</span>
+           <h1>Vet Appointment History</h1>
+           <div id="display-vet-name">Dr. Madam</div>
+           <div class="cli-dts">
+            <div class="history-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Client</th>
+                            <th>Status</th>
+                        </tr>
+                        <tbody id = "tablebody">
+                            <tr>
+                                <td>DATE</th>
+                                <td>TIME</th>
+                                <td>CLEINT</th>
+                                <td>COMPLETED</td>
+                            </tr>
+                            <!--
+                            <tr>
+                            </tr>-->
+                        </tbody>
+                    </thead>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addvetmodal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close3">&times;</span>
+           <h1>Add Pet</h1>
+           <div class="cli-dts">
+                <div class="clitab1">
+                    <img src="../../assets/img/emptypfp.jpg" class="acc-pic" id="add-pet-pic" width="150">
+                    <button class="profbtn" id="upd-petpic">Upload<br>Pet's Photo</button>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;" required>
+                </div>
+                <div class="clitab2">
+                    <div class="cred-box">
+                        <label>Name</label>
+                        <form class="form-element">
+                            <input type="text" id="addvetname" placeholder="Enter vet's name">
+                        </form>
+                        <label>Email</label>
+                        <form class="form-element">
+                            <input type="text" id="addvetemail" placeholder="Enter vet's email">
+                        </form>
+                        <label>Contact No.</label>
+                        <form class="form-element">
+                            <input type="text" id="addvetcontact" placeholder="Enter vet's contact no.">
+                        </form>
+                    </div>
+                    <div class="trailbuttons">
+                        <button class="btns" id="add-vet-btn">Add Vet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        //VIEW PROFILE
+        var VPmodal = document.getElementById("viewvetmodal");
+        var VPbtn = document.getElementById("view-vetprofile");
+        var span1 = document.getElementById("close1");
+
+        VPbtn.onclick = function() {
+            VPmodal.style.display = "block";
+        }
+
+        span1.onclick = function() {
+            VPmodal.style.display = "none";
+        }
+
+        //VIEW HISTORY
+        var VHmodal = document.getElementById("vethistorymodal");
+        var VHbtn = document.getElementById("view-vethistory");
+        var span2 = document.getElementById("close2");
+
+        VHbtn.onclick = function() {
+            VHmodal.style.display = "block";
+        }
+
+        span2.onclick = function() {
+            VHmodal.style.display = "none";
+        }
+
+        //ADD VET
+        var AVmodal = document.getElementById("addvetmodal");
+        var AVbtn = document.getElementById("add-vet");
+        var span3 = document.getElementById("close3");
+
+        AVbtn.onclick = function() {
+            AVmodal.style.display = "block";
+        }
+
+        span3.onclick = function() {
+            AVmodal.style.display = "none";
+        }
+
+        //BLOCK ALERT
+        const blockbtn = document.getElementById("removevet");
+        blockbtn.addEventListener("click", function() {
+        const result = confirm("Do you want to remove this vet?");
+            if (result) {
+                alert("You clicked 'Yes'");
+            } else {
+                alert("You clicked 'No'");
+            }
+        });
+    </script>
+    <script src="../../scripts/logout.js"></script>
+</body>

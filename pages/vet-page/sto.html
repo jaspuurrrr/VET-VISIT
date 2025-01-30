@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>Session expired.</title>
+
+<body>
+    <h1>Session expired. Please log in again.<br>Redirecting to home page...</h1>
+    <h1 id = "timer">Timer: 3...</h1>
+
+    <script>
+        // Function to update the timer
+        var seconds = 3;
+        function updateTimer() {
+            var timerElement = document.getElementById("timer");
+            
+
+            // Update the timer value
+            seconds--;
+
+            // Display the updated timer value
+            timerElement.innerText = "Timer: " + seconds + "...";
+
+            // Check if the timer has reached zero
+            if (seconds <= 0) {
+                // Redirect to another webpage after the timer reaches zero
+                window.location.href = "../../index.html";
+            } else {
+                // Call the updateTimer function again after 1 second
+                setTimeout(updateTimer, 1000);
+            }
+        }
+
+        // Initial call to start the timer
+        setTimeout(updateTimer, 1000);
+    </script>
+</body>

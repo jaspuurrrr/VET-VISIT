@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>VetVisit Web App</title>
+    <link rel="icon" href="../../assets/img/VetVisitIcon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <link rel="stylesheet" href="../../styles/clientstyles.css">
+
+    <link rel="stylesheet" href="../../styles/client-calstyles.css">
+
+    <!--<link rel="stylesheet" href="../../styles/dropdown.css">-->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+
+</head>
+
+<body>
+    <script>
+
+
+      function loadPage() {
+      // Check online status
+      fetch('../../php/check_status.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.email) {
+          email = data.email;
+          //alert(email);
+          //loadAcc(email);
+        }
+        else if (data.error){
+          window.location.href = 'sto.html'
+          exit();
+        } else {
+
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });   
+    }
+    loadPage();
+    </script>
+    <!--HamMenu-->
+    <div class="bx bx-menu" id="dash-icon"></div>
+    <!--SIDEBAR-->
+    <div class="sidebar">
+        <div class="lbl"><i class='bx bxs-clinic'></i> VetVisit</a></div>
+        <ul>
+            <li><a href="client-cal.html">Book Appointment</a></li>
+            <li><a href="client-history.html">History</a></li>
+            <li><a href="client-pets.html">My Pets</a></li>
+            <li><a href="client-account.html">Account</a></li>
+        </ul>
+        <button id="logout">Log Out</button>
+    </div>
+
+    <div class="calcontainer">
+      <!--LEFT SIDE-->
+      <div class="left">
+        <div class="calendar">
+          <div class="month">
+            <i class='bx bx-chevron-left prev' ></i>
+            <div class="date">december 2015</div>
+            <i class='bx bx-chevron-right next' ></i>
+          </div>
+          <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+          </div>
+          <div class="days"></div>
+          <div class="goto-today">
+            <div class="goto">
+              <input type="text" placeholder="mm/yyyy" class="date-input" />
+              <button class="goto-btn">Go</button>
+            </div>
+            <button class="today-btn">Today</button>
+          </div>
+        </div>
+      </div>
+      <!--RIGHT SIDE-->
+      <div class="right">
+        <div class="today-date">
+          <div class="event-day">wed</div>
+          <div class="event-date">12th december 2022</div>
+        </div>
+        <div class="time-cont">
+          <div class="avail">Time Slots:</div>
+          <div class="events">
+            <div class="time-slot" data-time="9:00 AM - 10:00 AM">9AM - 10AM</div>
+            <div class="time-slot" data-time="10:00 AM - 11:00 AM">10AM - 11AM</div>
+            <div class="time-slot" data-time="11:00 AM - 12:00 PM">11AM - 12PM</div>
+            <div class="time-slot" data-time="12:00 PM - 1:00 PM">12PM - 1PM</div>
+            <div class="time-slot" data-time="12:00 PM - 1:00 PM">1PM - 2PM</div>
+            <div class="time-slot" data-time="12:00 PM - 1:00 PM">2PM - 3PM</div>
+            <div class="time-slot" data-time="12:00 PM - 1:00 PM">3PM - 4PM</div>
+            <div class="time-slot" data-time="12:00 PM - 1:00 PM">4PM - 5PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <!--SET APPOINTMENT MODAL-->
+    <div class="modal" id="myModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+          <h1>Set Appointment Details</h1>
+          <div class="appt-con">
+            <div class="appt-date">
+              <span id="modal-date"></span>
+              <p>|</p>
+              <span id="modal-day"></span>
+            </div>
+            <div class="appt-ts">
+              <p id = "form-time">Time Slot: </p>
+              <span id="modal-time"></span>
+            </div>
+          </div>
+          <form class="appt-con">
+            <label>Description:</label>
+            <input class="appt-inputs" id="appt-descrip" placeholder="Describe the reason for visit."> 
+          </form>
+          <form class="appt-con" onsubmit="return false;">
+            <label>Veterinarian:</label>
+            <div class="choosevetbox">
+              <input class="appt-inputs" id="appt-vetchoice" placeholder="Choose a vet from the dropdown." disabled>
+              <input id="form-vetid" style="display: none;" disabled>
+              <div class="dropdown">
+                <button class="dropbtn" id="appt-choosevet" onclick="DropItVet()">Choose Vet</button>
+                <div class="dp4" id="vetDropdown">
+                  <div class="vdropdown-content" id="vetslist">
+                    <!--<a href="#" class="vets-item" onclick="autoassign()">--auto-assign--</a>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="appt-con">
+            <div class="appt-pet-con">
+              <label>Pet Details:</label>
+              <div class="dropdown">
+                <button class="dropbtn" id="appt-choosepet" onclick="DropItPet()">Choose Pet</button>
+                <input id="form-petid" style="display: none;" disabled>
+                <div class="dp3"  id="myDropdown">
+                  <div class="dropdown-content" id="petslist">
+                    <a href="#" class="pets-item" onclick="deselect()">--deselect--</a>
+                    <a href="client-pets.html" class="pets-item" >Add Pets</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form class="appt-conpet">
+              <div class="appt-conpet2">
+                <label>Name:</label>
+                <input class="appt-inputs" id="appt-petname" placeholder = "View pets list from the 'My Pets' tab." disabled> 
+                <label>Pet Type:</label>
+                <input class="appt-inputs" id="appt-pettype" disabled>
+              </div>
+              <div class="appt-conpet2">
+                <label>Age:</label>
+                <input class="appt-inputs" id="appt-petage" disabled> 
+                <input style="display: none;" id="form-petid" disabled> 
+              </div> 
+            </form>
+          </div>
+          <button id="set-appt">Proceed</button>
+      </div>
+    </div>
+  <script src="../../scripts/client-calscript.js"></script>
+
+  <script>
+    function DropItPet() {
+      var dropdownContent = document.getElementById("myDropdown");
+      dropdownContent.classList.toggle("show1");
+    }
+    
+    function DropItVet() {
+      var VdropdownContent = document.getElementById("vetDropdown");
+      VdropdownContent.classList.toggle("show2");
+    }
+
+    document.getElementById("set-appt").addEventListener('click',function(){
+      if (document.getElementById("appt-petname").value == '' || document.getElementById("appt-descrip").value == '' || document.getElementById("appt-vetchoice").value == ''){
+        alert("All fields are required!");
+        return 0;
+      }
+
+      var apptdate = convertDateFormat(document.getElementById("modal-date").textContent);
+      var appttime = document.getElementById("form-time").textContent;
+      var apptvetid = document.getElementById("form-vetid").value;
+      var apptdes = document.getElementById("appt-descrip").value;
+      var apptpet = document.getElementById("form-petid").value;
+      const apptstatus = "Pending";
+      const apptremarks = "Pending";
+
+      var appt = {
+        date: apptdate,
+        time: appttime.slice(11),
+        vet: apptvetid,
+        des: apptdes,
+        pet: apptpet,
+        status: apptstatus,
+        remarks:apptremarks
+      }
+
+
+      fetch('../../php/postAppt.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(appt)
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        //alert("hi");
+        window.location.href = 'paymentpage.html'
+      })
+
+      
+    })
+
+
+    //alert("hahahahaha");
+    fetch('../../php/loadvets.php')
+    .then(response => response.json())
+    .then(data => {
+      //alert("hahaha");
+      var vetcount = 0;
+      data.forEach(jsonString => {
+        vetcount++;
+        var jsonObject = JSON.parse(jsonString);
+        var newVet = {
+          vetid: jsonObject.vetid,
+          name: jsonObject.name
+        }
+        var newItem = document.createElement("a");
+        newItem.id = "vetname" + vetcount;
+        newItem.textContent = newVet.vetid;
+        newItem.class = "vets-item";
+        var newInviItem = document.createElement("a");
+        newInviItem.id = "vetid" + vetcount;
+        newInviItem.textContent = newVet.vetid;
+        newInviItem.style = "display: none;";
+        newItem.addEventListener("click", (function(index) {
+          return function() {
+            //alert(document.getElementById("vetname" + index).textContent);
+            document.getElementById("appt-vetchoice").value = document.getElementById("vetname" + index).textContent;
+            document.getElementById("form-vetid").value = document.getElementById("vetid" + index).textContent;
+            //alert(document.getElementById("form-vetid").value)
+            DropItVet();
+          };
+        })(vetcount));
+        document.getElementById("vetslist").appendChild(newItem);
+        document.getElementById("vetslist").appendChild(newInviItem);
+      })
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+    });
+
+
+    //alert("hahahahaha");
+    fetch('../../php/loadpets.php')
+    .then(response => response.json())
+    .then(data => {
+      //alert("hahaha");
+      var petcount = 0;
+      data.forEach(jsonString => {
+        petcount++;
+        var jsonObject = JSON.parse(jsonString);
+        var newPet = {
+          petid: jsonObject.petno,
+          name: jsonObject.name,
+          type: jsonObject.type,
+          age: jsonObject.age
+        }
+        var newItem = document.createElement("a");
+        newItem.id = "petname" + petcount;
+        newItem.textContent = newPet.name;
+        newItem.class = "pets-item";
+        var newInviItem = document.createElement("a");
+        newInviItem.id = "petid" + petcount;
+        newInviItem.textContent = newPet.petid;
+        newInviItem.style = "display: none;";
+        newItem.addEventListener("click", (function(index) {
+          return function() {
+            //alert(document.getElementById("vetname" + index).textContent);
+            document.getElementById("appt-petname").value = newPet.name;
+            document.getElementById("appt-pettype").value = newPet.type;
+            document.getElementById("appt-petage").value = newPet.age;
+            document.getElementById("form-petid").value = newPet.petid;
+            //alert(document.getElementById("form-vetid").value)
+            DropItPet();
+          };
+        })(petcount));
+        document.getElementById("petslist").appendChild(newItem);
+        document.getElementById("petslist").appendChild(newInviItem);
+      })
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+    });
+
+    function deselect(){
+      DropItPet();
+      document.getElementById("appt-petname").value = '';
+      document.getElementById("appt-pettype").value = '';
+      document.getElementById("appt-petage").value = '';
+      document.getElementById("form-petid").value = '';
+      //alert(convertDateFormat(document.getElementById("modal-date").textContent));
+    }
+
+    function autoassign(){
+      DropItVet();
+      document.getElementById("appt-vetchoice").value = 'Auto-assign.';
+      document.getElementById("form-vetid").value = '';
+    }
+
+  </script>
+  <script src="../../scripts/logout.js"></script>
+</body>

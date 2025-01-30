@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>VetVisit Web App</title>
+    <link rel="icon" href="assets\img\VetVisitIcon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="styles/indexstyles.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+</head>
+
+<body>
+
+    <div id="modal"></div> 
+    <!--WELCOME NAVBAR-->
+    <header>
+        <!--Logo-->
+        <a href="#" class="logo"><i class='bx bxs-clinic'></i>VetVisit</a>
+        <!--HamMenu-->
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <!--NavList-->
+        <ul class="navbar">
+            <list><a href="#welcome" class="welcome-active navbut">Welcome</a></list>
+            <list><a href="#services" class="navbut">Services</a></list>
+            <list><a href="#about" class="navbut">About</a></list>
+            <list><a href="#vets" class="navbut">Our Vets</a></list>
+        </ul>
+        <!--AccountList-->
+        <ul class="signin">
+            <list><a href="#" id="popup-link">Log In</a></list>
+            <list><a href="#" id="popup2-link">Sign Up</a></list>
+        </ul>
+    </header>
+
+    <!--WELCOME SECTION-->
+    <section class="welcome swiper" id="welcome">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide container">
+                <div class="home-text">
+                    <span>WELCOME TO VETVISIT</span>
+                    <h1>Book your <br> veterinary <br> appointments <br> today.</h1>
+                    <a href="index.html?loginPage=true" class="btn">Book Appointment<i class='bx bxs-chevron-right'></i></a>
+                </div>
+               <img src="assets/img/wel01.png" alt="">
+            </div>
+            <div class="swiper-slide container">
+                <div class="home-text">
+                    <span>WELCOME TO VETVISIT</span>
+                    <h1>Book your <br> veterinary <br> appointments <br> today.</h1>
+                    <a href="index.html?loginPage=true" class="btn">Book Appointment<i class='bx bxs-chevron-right'></i></a>
+                </div>
+                <img src="assets/img/wel02.png" alt="">
+            </div>
+          </div>
+   
+    </section>
+
+    <!--OUR SERVICES-->
+    <section class="services" id="services">
+        <div class="heading">
+            <h1>Our Services</h1>
+        </div>
+        <div class="services-container">
+            <div class="box box1">
+                <img src="assets/img/bxs-injection.svg" alt="">
+                <h2>Vaccinations</h2>
+            </div>
+            <div class="box box2">
+                <img src="assets/img/bx-plus-medical.svg" alt="">
+                <h2>Check Up</h2>
+            </div>
+            <div class="box box3">
+                <img src="assets/img/bx-cut.svg" alt="">
+                <h2>Basic Grooming</h2>
+            </div>
+            <div class="box box4">
+                <img src="assets/img/bxs-bone.svg" alt="">
+                <h2>Wellness Exam</h2>
+            </div>
+            <div class="box box5">
+                <img src="assets/img/bx-pulse.svg" alt="">
+                <h2>Surgery</h2>
+            </div>
+        </div>
+    </section>
+
+    <!--ABOUT-->
+    <section class="about" id="about">
+        <img src="assets/img/aboutpic.png" alt="">
+        <div class="about-text">
+            <span>About VetVisit</span>
+            <p>VetVisit is an online appointment<br>booking system made for your<br>convenience.</p>
+        </div>
+    </section>
+
+    <!--VETERINARIANS-->
+    <section class="vets" id="vets">
+        <h2>Meet Our Trusted Veterinarians</h2>
+        <div class="vets-container">
+            <!--VET NO.1-->
+            <div class="box">
+                <i class='bx bxs-badge-check'></i>
+                <div class="vet-profile">
+                    <h3>Dr. Kristine Diaz</h3>
+                    <img src="assets/vets/02.PNG" alt="">
+                    <p>Dr. Diaz specializes in geriatric dog care, tailoring treatments for older pets' comfort and vitality.</p>
+                </div>
+            </div>
+            
+            <!--VET NO.2-->
+            <div class="box">
+                <i class='bx bxs-badge-check'></i>
+                <div class="vet-profile">
+                    <h3>Dr. Daniela Suazon</h3>
+                    <img src="assets/vets/04.PNG" alt="">
+                    <p>Dr. Suazon is an avian vet, offering medical services and behavioral advice for exotic birds.</p>
+                </div>
+            </div>
+            
+            <!--VET NO.3-->
+            <div class="box">
+                <i class='bx bxs-badge-check'></i>
+                <div class="vet-profile">
+                    <h3>Dr. Carlos Jimenez</h3>
+                    <img src="assets/vets/01.PNG" alt="">
+                    <p>Dr. Jimenez excels in equine sports medicine, aiding horses' peak performance.</p>
+                </div>
+            </div>
+            
+            <!--VET NO.4-->
+            <div class="box">
+                <i class='bx bxs-badge-check'></i>
+                <div class="vet-profile">
+                    <h3>Dr. Jameson Cruz</h3>
+                    <img src="assets/vets/03.PNG" alt="">
+                    <p>Dr. Cruz is dedicated to wildlife conservation, rescuing and rehabilitating injured animals.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!--FOOTER-->
+    <section class="footer" id="footer">
+        <div class="footer-container">
+            <div class="footer-box">
+                <h2 href="#" class="flog"><i class='bx bxs-clinic'></i> VetVisit</h2>
+                
+            </div>
+            <div class="footer-box">
+                <h2><a href="index.html?loginPage=true">Book Appointment Now</a></h2>
+                
+            </div>
+            <div class="footer-box">
+                <h2><a href="#services">Our Services</a></h2>
+                
+            </div>
+           
+        </div>
+    </section>
+
+    <!--swiper-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!--LOGIN / SIGNUP-->
+    <div id="modal"></div> 
+        <!--LOGIN-->
+        <div id="popup-cont">
+            <div id="popop">
+                <div class="bx bx-x" id="closebutt"></div>
+                <h1>Login</h1>
+                <div class="form-element">
+                    <label for="email">Email</label>
+                    <input type="text" id="emaillog" placeholder="Enter email">
+                </div>
+                <div class="form-element">
+                    <label for="password">Password</label>
+                    <input type="password" id="passwordlog" placeholder="Enter password">
+                </div>
+                <!--<p id="forgotpw">Forgot Password?</p>--> 
+                <div class="form-element">
+                    <a class="btnlogin" id="login">Login</a>
+                </div>
+                <button id="switchtosignup">Don't have an account? Sign Up.</button>
+                <!--<p href="#">Don't have an account? Sign Up.</p>--> 
+            </div>
+        </div>
+        <!--SIGN UP-->
+        <div id="popup2-cont">
+            <div id="popop">
+                <div class="bx bx-x" id="close2butt"></div>
+                <h1>Sign Up</h1>
+                <div class="form-element">
+                    <label for="email">Email</label>
+                    <input type="text" id="emailsign" placeholder="Enter email">
+                </div>
+                <div class="form-element">
+                    <label for="password">Password</label>
+                    <input type="password" id="passwordsign" placeholder="Enter password">
+                    <label for="repassword">Re-enter Password</label>
+                    <input type="password" id="repassword" placeholder="Re-enter password">
+                </div>
+                <div class="form-element">
+                    <!--<a href="pages/client-page/user-reg.html" class="btnlogin" id="signup">Sign Up</a>-->
+                    <a class="btnlogin" id="signup">Sign Up</a>
+                </div>
+                <button id="switchtologin">Already have an account? Log In.</button>
+            </div>
+        </div> 
+
+        
+
+    <!--link to JS file-->
+    <script src="scripts/indexscript.js"></script>
+    <script>
+        document.querySelectorAll(".navbut").forEach(button => {
+            button.addEventListener("click", function() {
+                // Remove the "welcome-active" class from all elements
+                document.querySelectorAll(".navbut").forEach(btn => btn.classList.remove("welcome-active"));
+                
+                // Add the "welcome-active" class to the clicked element
+                this.classList.add("welcome-active");
+            });
+        });
+
+        fetch('php/endsession.php');
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('loginPage')) {
+            document.getElementById("popup-cont").style.display = "block";
+        }
+
+    </script>   
+
+</body>
+
+</html>

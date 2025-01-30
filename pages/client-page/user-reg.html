@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>VetVisit Web App</title>
+    <link rel="icon" href="../../assets/img/VetVisitIcon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="../../styles/clientstyles.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body class="body-signup">
+    <header>
+        <!--Logo-->
+        <a href="#" class="logo"><i class='bx bxs-clinic'></i>VetVisit</a>
+        <ul class="signin">
+            <list><a href="../../index.html">Cancel</a></list>
+        </ul>
+    </header>
+
+    <div class="container cont-signup">
+        <h1>Complete User Sign Up</h1>
+        <div class="user-acc-body">
+            <div class="profiletab1" id = "previewContainer">
+                <img src="../../assets/img/emptypfp.jpg" class="acc-pic" id="acc-pic" width="150">
+                <button class="profbtn" id="upd-pfp">Upload Profile Photo</button>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;" required>
+            </div>
+            <div class="profiletab2">
+                <div class="cred-box">
+                    <label>Name</label>
+                    <form class="form-element">
+                        <input type="text" id="client-name" placeholder="Enter your name">
+                    </form>
+                    <label>Contact No.</label>
+                    <form class="form-element">
+                        <input type="text" id="client-contactno" placeholder="Enter your contact no.">
+                    </form>
+                </div>
+                <div class="trailbuttons">
+                    <button class="profbtn" id="comp-signup">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        document.getElementById("upd-pfp").addEventListener("click", openFileInput);
+        document.getElementById("comp-signup").addEventListener("click", saveProfile);
+        document.getElementById("fileInput").addEventListener("change", handleFileInput);
+
+        function saveProfile() {
+            console.log("hi");
+            //alert("start");
+            var name = document.getElementById('client-name').value;
+            var contact = document.getElementById('client-contactno').value;
+            var file = fileInput.files[0];
+            var formData = new FormData();
+            var defpic = "../../assets/img/emptypfp.jpg";
+
+            var regex = /^[0-9]+$/;
+            if (!regex.test(contact)){
+                alert("Please enter a valid contact number! Include numeric characters only.");
+                return 0;
+            }
+
+            // Simulated image data (replace with actual image data)
+            var pfp; // Replace with the actual base64-encoded image data
+
+            if (file) {
+                // Create a FileReader
+                var reader = new FileReader();
+
+                // Event listener for when the FileReader has read the file
+                reader.onload = function (event) {
+                    // Get the base64 encoded string
+                    var base64Image = event.target.result.split(',')[1];
+
+                    // Use the base64Image as needed
+                    console.log(base64Image);
+
+                    // Set the pfp variable here
+                    pfp = base64Image;
+
+                    // Continue with the rest of the code
+                    //alert(pfp);
+                    
+                    // Example data
+                    var profile = {
+                        pfp: pfp,
+                        name: name,
+                        contact: contact
+                    };
+
+                    // Make the fetch request
+                    fetch('../../php/saveprof.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(profile)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert("Account successfully created! Redirecting you to home page. Please proceed to login.");
+                                window.location.href = '../../index.html?loginPage=true';
+                            } else {
+                                alert(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                };
+
+                // Read the file as a data URL (base64 encoding)
+                reader.readAsDataURL(file);
+
+            } else {
+                // Fetch default image
+                fetch(defpic)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        // Create a new FileReader
+                        var reader = new FileReader();
+
+                        // Event listener for when the FileReader has read the blob
+                        reader.onload = function () {
+                            // Get the base64 encoded string
+                            var base64Image = reader.result.split(',')[1];
+
+                            // Use the base64Image as needed
+                            console.log(base64Image);
+
+                            // Set the pfp variable here
+                            pfp = base64Image;
+
+                            // Continue with the rest of the code
+                            //alert(pfp);
+                            
+                            // Example data
+                            var profile = {
+                                pfp: pfp,
+                                name: name,
+                                contact: contact
+                            };
+
+                            // Make the fetch request
+                            fetch('../../php/saveprof.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(profile)
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        alert("Account successfully created! Redirecting you to home page. Please proceed to login.");
+                                        window.location.href = '../../index.html?loginPage=true';
+                                    } else {
+                                        alert(data.message);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        };
+
+                        // Read the blob as a data URL (base64 encoding)
+                        reader.readAsDataURL(blob);
+
+                    })
+                    .catch(error => console.error('Error fetching image:', error));
+            }
+        }
+
+        function openFileInput() {
+            // Trigger file input click
+            document.getElementById("fileInput").click();
+            handleFileInput();
+        }
+
+        function handleFileInput() {
+            var fileInput = document.getElementById("fileInput");
+
+            if (fileInput.files.length > 0) {
+                var file = fileInput.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // Display the selected image in the preview
+                    document.getElementById("acc-pic").src = e.target.result;
+                    //document.getElementById("previewContainer").style.display = "block";
+
+                    // Auto crop the largest square at the center of the image
+                    //autoCropImage(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                //alert("Please select a file.");
+            }
+        }
+
+        // Attach the handleFileInput function to the change event of the file input
+        document.getElementById("fileInput").addEventListener("change", handleFileInput);
+    </script>
+
+</body>
